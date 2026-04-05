@@ -1,20 +1,60 @@
-.htaccess
-/config.php
-admin/config.php
+```
+# Dependencies
+node_modules/
 
-!index.html
+# Build artifacts
+dist/
+build/
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.a
+*.out
 
-download/
-image/data/
-image/cache/
-system/cache/
-system/logs/
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+.venv.bak/
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+*.tmp
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
 
-system/storage/
+# Logs
+*.log
 
-# vQmod log files
-vqmod/logs/*
-# vQmod cache files
-vqmod/vqcache/*
-vqmod/checked.cache
-vqmod/mods.cache
+# Environment variables
+.env
+.env.local
+*.env.*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Coverage
+coverage/
+htmlcov/
+.coverage
+```

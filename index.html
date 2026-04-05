@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomeStyle - Товары для дома и обустройства</title>
+    <meta name="description" content="Широкий ассортимент товаров для дома, ремонта и декора. Удобный каталог, 3D-визуализация, быстрая доставка.">
+    
+    <!-- SEO & Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HomeGoodsStore",
+      "name": "HomeStyle",
+      "image": "https://via.placeholder.com/1200x600",
+      "description": "Сеть магазинов товаров для дома, ремонта и декора.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "ул. Строителей, 10",
+        "addressLocality": "Москва",
+        "postalCode": "101000",
+        "addressCountry": "RU"
+      },
+      "priceRange": "$$"
+    }
+    </script>
+
+    <style>
+        /* --- CSS VARIABLES & THEMES --- */
+        :root {
+            /* Standard Theme */
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --primary-color: #2c5f2d; /* Green - Eco/Reliability */
+            --secondary-color: #97bc62;
+            --accent-color: #ffc107;
+            --header-bg: #f8f9fa;
+            --card-bg: #ffffff;
+            --border-color: #e0e0e0;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --font-size-base: 16px;
+            --line-height: 1.6;
+            --contrast-ratio: 4.5;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        /* High Contrast / Visually Impaired Theme (ГОСТ Р 52872-2017) */
+        body.accessible-mode {
+            --bg-color: #000000;
+            --text-color: #ffffff;
+            --primary-color: #ffff00; /* Yellow for high contrast */
+            --secondary-color: #00ffff;
+            --accent-color: #ff00ff;
+            --header-bg: #1a1a1a;
+            --card-bg: #1a1a1a;
+            --border-color: #ffffff;
+            --font-main: Arial, sans-serif; /* Simple sans-serif */
+            --font-size-base: 20px; /* Increased base size */
+            --line-height: 1.8;
+            --shadow: none;
+        }
+
+        /* --- RESET & BASE STYLES --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-size: var(--font-size-base);
+            line-height: var(--line-height);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.2s; }
+        a:hover { color: var(--primary-color); }
+        ul { list-style: none; }
+        img { max-width: 100%; height: auto; display: block; }
+        button { cursor: pointer; font-family: inherit; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- ACCESSIBILITY BUTTON --- */
+        .accessibility-panel {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .btn-access {
+            background: var(--primary-color);
+            color: #fff;
+            border: 2px solid var(--text-color);
+            padding: 10px 15px;
+            font-weight: bold;
+            font-size: 14px;
+            border-radius: 4px;
+        }
+        
+        body.accessible-mode .btn-access {
+            background: #ffff00;
+            color: #000;
+            border-color: #fff;
+        }
+
+        /* --- HEADER --- */
+        header {
+            background-color: var(--header-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search-bar {
+            flex-grow: 1;
+            margin: 0 40px;
+            display: flex;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px 0 0 4px;
+            background: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        .search-bar button {
+            padding: 10px 20px;
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .action-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 12px;
+            position: relative;
+        }
+
+        .badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--accent-color);
+            color: #000;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            border-top: 1px solid var(--border-color);
+            padding-top: 15px;
+        }
+
+        nav a {
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://placehold.co/1920x600/2c5f2d/ffffff?text=Уют+в+вашем+доме');
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: #fff;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 4px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            background: var(--secondary-color);
+        }
+
+        /* --- CATALOG & FILTERS --- */
+        .catalog-section {
+            padding: 60px 0;
+        }
+
+        .catalog-layout {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 30px;
+        }
+
+        .filters {
+            background: var(--card-bg);
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            height: fit-content;
+        }
+
+        .filter-group {
+            margin-bottom: 20px;
+        }
+
+        .filter-group h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .filter-group label {
+            display: block;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            box-shadow: var(--shadow);
+        }
+
+        .product-image {
+            height: 200px;
+            background: #eee;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 15px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            font-size: 20px;
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .product-actions {
+            margin-top: auto;
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-add-cart {
+            flex-grow: 1;
+            padding: 10px;
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+        }
+
+        .btn-favorite {
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            background: transparent;
+            color: var(--text-color);
+            border-radius: 4px;
+        }
+
+        /* --- ABOUT & FEATURES --- */
+        .features {
+            padding: 60px 0;
+            background: var(--header-bg);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .feature-item i {
+            font-size: 40px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #222;
+            color: #fff;
+            padding: 40px 0;
+            margin-top: 60px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-col h4 {
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            font-size: 14px;
+        }
+
+        /* --- MODAL (Cart/Login) --- */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: var(--bg-color);
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            color: var(--text-color);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .catalog-layout {
+                grid-template-columns: 1fr;
+            }
+            .filters {
+                display: none; /* In real app, make it collapsible */
+            }
+            .header-top {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .search-bar {
+                margin: 0;
+                width: 100%;
+            }
+            nav ul {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+            .hero h1 {
+                font-size: 32px;
+            }
+        }
+        
+        /* Utility for 404 and specific pages */
+        .page-section { display: none; padding: 40px 0; }
+        .page-section.active { display: block; }
+        
+        .breadcrumbs {
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+        body.accessible-mode .breadcrumbs { color: #fff; }
+
+    </style>
+</head>
+<body>
+
+    <!-- Accessibility Panel -->
+    <div class="accessibility-panel">
+        <button class="btn-access" onclick="toggleAccessibility()" aria-label="Версия для слабовидящих">
+            👁 Версия для слабовидящих
+        </button>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <a href="#" class="logo" onclick="navigate('home')">
+                    🏠 HomeStyle
+                </a>
+                <div class="search-bar">
+                    <input type="text" placeholder="Поиск товаров (например: диван, лампа)...">
+                    <button>Найти</button>
+                </div>
+                <div class="user-actions">
+                    <a href="#" class="action-item" onclick="alert('Функция сравнения в разработке')">
+                        <span>⚖️</span>
+                        <span>Сравнить</span>
+                    </a>
+                    <a href="#" class="action-item" onclick="alert('Избранное пусто')">
+                        <span>❤️</span>
+                        <span>Избранное</span>
+                    </a>
+                    <a href="#" class="action-item" onclick="openModal('cart-modal')">
+                        <span>🛒</span>
+                        <span>Корзина</span>
+                        <span class="badge" id="cart-count">0</span>
+                    </a>
+                    <a href="#" class="action-item" onclick="openModal('login-modal')">
+                        <span>👤</span>
+                        <span>Войти</span>
+                    </a>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" onclick="navigate('home')">Главная</a></li>
+                    <li><a href="#" onclick="navigate('catalog')">Каталог</a></li>
+                    <li><a href="#" onclick="navigate('about')">О компании</a></li>
+                    <li><a href="#" onclick="navigate('contacts')">Контакты</a></li>
+                    <li><a href="#" onclick="navigate('portfolio')">Портфолио</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT AREA -->
+    <main id="app">
+        
+        <!-- HOME PAGE -->
+        <section id="home" class="page-section active">
+            <div class="hero">
+                <div class="container">
+                    <h1>Создайте дом своей мечты</h1>
+                    <p>Тысячи товаров для ремонта, декора и обустройства. Гарантия качества и быстрая доставка.</p>
+                    <button class="btn-primary" onclick="navigate('catalog')">Перейти в каталог</button>
+                </div>
+            </div>
+
+            <div class="features">
+                <div class="container">
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <h3>🚚 Быстрая доставка</h3>
+                            <p>Доставим в день заказа или в удобное время</p>
+                        </div>
+                        <div class="feature-item">
+                            <h3>🛡️ Гарантия качества</h3>
+                            <p>Только сертифицированные товары от проверенных брендов</p>
+                        </div>
+                        <div class="feature-item">
+                            <h3>💳 Удобная оплата</h3>
+                            <p>Оплата картой, наличными или в рассрочку</p>
+                        </div>
+                        <div class="feature-item">
+                            <h3>🎨 3D Визуализация</h3>
+                            <p>Примерьте товары в интерьере онлайн</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="catalog-section container">
+                <h2 style="margin-bottom: 20px;">Популярные категории</h2>
+                <div class="products-grid" id="featured-products">
+                    <!-- Products injected by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- CATALOG PAGE -->
+        <section id="catalog" class="page-section">
+            <div class="container">
+                <div class="breadcrumbs">
+                    <a href="#" onclick="navigate('home')">Главная</a> / Каталог
+                </div>
+                <h1 style="margin-bottom: 20px;">Каталог товаров</h1>
+                
+                <div class="catalog-layout">
+                    <aside class="filters">
+                        <div class="filter-group">
+                            <h3>Категория</h3>
+                            <label><input type="checkbox" checked> Мебель</label>
+                            <label><input type="checkbox" checked> Освещение</label>
+                            <label><input type="checkbox" checked> Декор</label>
+                            <label><input type="checkbox" checked> Текстиль</label>
+                        </div>
+                        <div class="filter-group">
+                            <h3>Цена</h3>
+                            <input type="range" min="0" max="100000" style="width: 100%">
+                            <div style="display: flex; justify-content: space-between; font-size: 14px;">
+                                <span>0 ₽</span>
+                                <span>100 000 ₽</span>
+                            </div>
+                        </div>
+                        <div class="filter-group">
+                            <h3>Рейтинг</h3>
+                            <label><input type="radio" name="rating"> ⭐⭐⭐⭐⭐</label>
+                            <label><input type="radio" name="rating"> ⭐⭐⭐⭐ и выше</label>
+                        </div>
+                        <button class="btn-primary" style="width: 100%">Применить</button>
+                    </aside>
+
+                    <div class="products-grid" id="catalog-products">
+                        <!-- Products injected by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT PAGE -->
+        <section id="about" class="page-section">
+            <div class="container">
+                <div class="breadcrumbs">
+                    <a href="#" onclick="navigate('home')">Главная</a> / О компании
+                </div>
+                <h1>О компании HomeStyle</h1>
+                <div style="margin-top: 20px; line-height: 1.8;">
+                    <p>Мы — ведущая сеть магазинов товаров для дома, работающая на рынке более 10 лет. Наша миссия — сделать каждый дом уютным, функциональным и стильным.</p>
+                    <br>
+                    <h3>Почему выбирают нас?</h3>
+                    <ul style="list-style: disc; margin-left: 20px; margin-top: 10px;">
+                        <li>Широкий ассортимент: более 10 000 товаров.</li>
+                        <li>Профессиональные консультанты и дизайнеры.</li>
+                        <li>Собственная служба доставки и сборки.</li>
+                        <li>Программа лояльности для постоянных клиентов.</li>
+                    </ul>
+                    <br>
+                    <img src="https://placehold.co/1200x400/eee/333?text=Наша+команда+и+офис" alt="Офис компании" style="margin: 20px 0; border-radius: 4px;">
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACTS PAGE -->
+        <section id="contacts" class="page-section">
+            <div class="container">
+                <div class="breadcrumbs">
+                    <a href="#" onclick="navigate('home')">Главная</a> / Контакты
+                </div>
+                <h1>Контакты</h1>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 30px;">
+                    <div>
+                        <p><strong>Адрес:</strong> г. Москва, ул. Строителей, д. 10</p>
+                        <p><strong>Телефон:</strong> +7 (999) 000-00-00</p>
+                        <p><strong>Email:</strong> info@homestyle.ru</p>
+                        <p><strong>Режим работы:</strong> Пн-Вс: 09:00 - 21:00</p>
+                        
+                        <h3 style="margin-top: 30px;">Напишите нам</h3>
+                        <form style="margin-top: 15px; display: flex; flex-direction: column; gap: 15px;">
+                            <input type="text" placeholder="Ваше имя" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                            <input type="email" placeholder="Email" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                            <textarea rows="4" placeholder="Сообщение" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;"></textarea>
+                            <button class="btn-primary">Отправить</button>
+                        </form>
+                    </div>
+                    <div>
+                        <img src="https://placehold.co/600x400/ddd/555?text=Карта+проезда" alt="Карта" style="width: 100%; border-radius: 4px;">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PORTFOLIO PAGE -->
+        <section id="portfolio" class="page-section">
+            <div class="container">
+                <div class="breadcrumbs">
+                    <a href="#" onclick="navigate('home')">Главная</a> / Портфолио
+                </div>
+                <h1>Наши проекты</h1>
+                <p style="margin-bottom: 20px;">Примеры реализованных интерьеров с использованием наших товаров.</p>
+                <div class="products-grid">
+                    <div class="product-card">
+                        <img src="https://placehold.co/400x300/2c5f2d/fff?text=Интерьер+Гостиной" alt="Гостиная">
+                        <div class="product-info">
+                            <div class="product-title">Современная гостиная</div>
+                            <p>Использовано: диван "Comfort", лампа "Lumina", декор.</p>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://placehold.co/400x300/97bc62/fff?text=Интерьер+Кухни" alt="Кухня">
+                        <div class="product-info">
+                            <div class="product-title">Уютная кухня</div>
+                            <p>Использовано: гарнитур "Chef", стол "Wood", стулья.</p>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://placehold.co/400x300/ffc107/000?text=Интерьер+Спальни" alt="Спальня">
+                        <div class="product-info">
+                            <div class="product-title">Спальня мечты</div>
+                            <p>Использовано: кровать "Dream", текстиль, светильники.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 404 PAGE -->
+        <section id="error404" class="page-section">
+            <div class="container" style="text-align: center; padding: 60px 0;">
+                <h1 style="font-size: 60px; color: var(--primary-color);">404</h1>
+                <h2>Страница не найдена</h2>
+                <p style="margin: 20px 0;">Похоже, вы заблудились в нашем большом магазине. Не волнуйтесь, мы поможем найти дорогу!</p>
+                <img src="https://placehold.co/400x200/eee/999?text=Товар+потерялся" alt="404 Image" style="margin: 0 auto 30px;">
+                <button class="btn-primary" onclick="navigate('home')">Вернуться на главную</button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>HomeStyle</h4>
+                    <p>Ваш надежный партнер в создании уюта.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Покупателям</h4>
+                    <ul>
+                        <li><a href="#">Как сделать заказ</a></li>
+                        <li><a href="#">Доставка и оплата</a></li>
+                        <li><a href="#">Возврат товара</a></li>
+                        <li><a href="#">Гарантия</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Компания</h4>
+                    <ul>
+                        <li><a href="#" onclick="navigate('about')">О нас</a></li>
+                        <li><a href="#" onclick="navigate('contacts')">Контакты</a></li>
+                        <li><a href="#">Вакансии</a></li>
+                        <li><a href="#">Новости</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Контакты</h4>
+                    <p>+7 (999) 000-00-00</p>
+                    <p>info@homestyle.ru</p>
+                    <p>г. Москва, ул. Строителей, 10</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2023 HomeStyle. Все права защищены. Сайт соответствует ГОСТ Р 52872-2017.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('cart-modal')">&times;</span>
+            <h2>Корзина</h2>
+            <div id="cart-items" style="margin: 20px 0; min-height: 100px;">
+                <p>Ваша корзина пуста.</p>
+            </div>
+            <div style="border-top: 1px solid #ccc; padding-top: 15px; display: flex; justify-content: space-between; align-items: center;">
+                <strong>Итого: <span id="cart-total">0</span> ₽</strong>
+                <button class="btn-primary" onclick="alert('Переход к оформлению заказа...')">Оформить</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('login-modal')">&times;</span>
+            <h2>Вход в личный кабинет</h2>
+            <form style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
+                <input type="email" placeholder="Email" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                <input type="password" placeholder="Пароль" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                <button class="btn-primary">Войти</button>
+                <p style="text-align: center; font-size: 14px;">Нет аккаунта? <a href="#" style="color: var(--primary-color);">Зарегистрироваться</a></p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // --- DATA ---
+        const products = [
+            { id: 1, title: "Диван угловой 'Comfort'", price: 45000, category: "Мебель", img: "https://placehold.co/300x200/2c5f2d/fff?text=Диван" },
+            { id: 2, title: "Лампа настольная 'Lumina'", price: 3500, category: "Освещение", img: "https://placehold.co/300x200/97bc62/fff?text=Лампа" },
+            { id: 3, title: "Ковер шерстяной 'Soft'", price: 12000, category: "Текстиль", img: "https://placehold.co/300x200/ffc107/000?text=Ковер" },
+            { id: 4, title: "Стеллаж деревянный", price: 8900, category: "Мебель", img: "https://placehold.co/300x200/555/fff?text=Стеллаж" },
+            { id: 5, title: "Набор посуды 'Chef'", price: 6500, category: "Декор", img: "https://placehold.co/300x200/333/fff?text=Посуда" },
+            { id: 6, title: "Кресло мягкое 'Relax'", price: 22000, category: "Мебель", img: "https://placehold.co/300x200/777/fff?text=Кресло" },
+            { id: 7, title: "Торшер современный", price: 5500, category: "Освещение", img: "https://placehold.co/300x200/444/fff?text=Торшер" },
+            { id: 8, title: "Подушки декоративные (2 шт)", price: 1500, category: "Текстиль", img: "https://placehold.co/300x200/888/fff?text=Подушки" },
+        ];
+
+        let cart = [];
+
+        // --- NAVIGATION ---
+        function navigate(pageId) {
+            // Hide all sections
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show target section
+            const target = document.getElementById(pageId);
+            if (target) {
+                target.classList.add('active');
+                window.scrollTo(0, 0);
+            } else {
+                // If page not found, show 404
+                document.getElementById('error404').classList.add('active');
+            }
+        }
+
+        // --- ACCESSIBILITY ---
+        function toggleAccessibility() {
+            document.body.classList.toggle('accessible-mode');
+            const btn = document.querySelector('.btn-access');
+            if (document.body.classList.contains('accessible-mode')) {
+                btn.textContent = "🔙 Обычная версия";
+                btn.setAttribute('aria-label', 'Обычная версия');
+            } else {
+                btn.textContent = "👁 Версия для слабовидящих";
+                btn.setAttribute('aria-label', 'Версия для слабовидящих');
+            }
+        }
+
+        // --- CART LOGIC ---
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            cart.push(product);
+            updateCartUI();
+            alert(`Товар "${product.title}" добавлен в корзину!`);
+        }
+
+        function updateCartUI() {
+            document.getElementById('cart-count').textContent = cart.length;
+            
+            const cartItemsContainer = document.getElementById('cart-items');
+            const totalElement = document.getElementById('cart-total');
+            
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p>Ваша корзина пуста.</p>';
+                totalElement.textContent = '0';
+                return;
+            }
+
+            let html = '<ul style="list-style: none;">';
+            let total = 0;
+            
+            cart.forEach((item, index) => {
+                total += item.price;
+                html += `
+                    <li style="display: flex; justify-content: space-between; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px;">
+                        <span>${item.title}</span>
+                        <span>${item.price.toLocaleString()} ₽ <button onclick="removeFromCart(${index})" style="color: red; border: none; background: none; cursor: pointer;">&times;</button></span>
+                    </li>
+                `;
+            });
+            html += '</ul>';
+            
+            cartItemsContainer.innerHTML = html;
+            totalElement.textContent = total.toLocaleString();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        // --- MODALS ---
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = "none";
+            }
+        }
+
+        // --- INITIALIZATION ---
+        function renderProducts(containerId, limit = null) {
+            const container = document.getElementById(containerId);
+            const dataToRender = limit ? products.slice(0, limit) : products;
+            
+            let html = '';
+            dataToRender.forEach(product => {
+                html += `
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="${product.img}" alt="${product.title}">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-title">${product.title}</div>
+                            <div class="product-price">${product.price.toLocaleString()} ₽</div>
+                            <div class="product-actions">
+                                <button class="btn-add-cart" onclick="addToCart(${product.id})">В корзину</button>
+                                <button class="btn-favorite" title="В избранное">❤️</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts('featured-products', 4);
+            renderProducts('catalog-products');
+        });
+
+    </script>
+</body>
+</html>

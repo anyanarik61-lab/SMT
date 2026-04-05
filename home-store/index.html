@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomeStore - Товары для дома</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/accessibility.css">
+</head>
+<body class="standard-mode">
+    <!-- Верхняя панель с доступностью -->
+    <div class="top-bar">
+        <div class="container">
+            <button id="accessibility-toggle" class="btn-accessibility" aria-label="Версия для слабовидящих">
+                <span class="icon">👁️</span>
+                <span>Версия для слабовидящих</span>
+            </button>
+            <div class="contact-info">
+                <span>📞 8 (800) 123-45-67</span>
+                <span>✉️ info@homestore.ru</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Шапка сайта -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>🏠 HomeStore</h1>
+                    <p>Товары для вашего дома</p>
+                </div>
+                
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="#catalog">Каталог</a></li>
+                        <li><a href="#about">О нас</a></li>
+                        <li><a href="#services">Услуги</a></li>
+                        <li><a href="#reviews">Отзывы</a></li>
+                        <li><a href="#contacts">Контакты</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <button class="btn-search" aria-label="Поиск">🔍</button>
+                    <button class="btn-favorites" aria-label="Избранное">❤️</button>
+                    <button class="btn-cart" aria-label="Корзина">
+                        🛒 <span class="cart-count">0</span>
+                    </button>
+                    <button class="btn-login" aria-label="Личный кабинет">👤</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Герой-секция -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Создайте дом своей мечты</h2>
+                <p>Широкий ассортимент товаров для ремонта, отделки и декора</p>
+                <div class="hero-buttons">
+                    <a href="#catalog" class="btn btn-primary">Перейти в каталог</a>
+                    <a href="#consultation" class="btn btn-secondary">Бесплатная консультация</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Каталог товаров -->
+    <section id="catalog" class="catalog">
+        <div class="container">
+            <h2>Каталог товаров</h2>
+            
+            <!-- Фильтры -->
+            <div class="filters">
+                <div class="filter-group">
+                    <label>Категория:</label>
+                    <select id="category-filter">
+                        <option value="">Все категории</option>
+                        <option value="repair">Ремонт</option>
+                        <option value="decoration">Отделка</option>
+                        <option value="decor">Декор</option>
+                        <option value="furniture">Мебель</option>
+                        <option value="lighting">Освещение</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label>Цена:</label>
+                    <div class="price-range">
+                        <input type="number" id="min-price" placeholder="От" min="0">
+                        <input type="number" id="max-price" placeholder="До" min="0">
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <label>Рейтинг:</label>
+                    <select id="rating-filter">
+                        <option value="">Любой</option>
+                        <option value="4">4+ звезды</option>
+                        <option value="3">3+ звезды</option>
+                    </select>
+                </div>
+                
+                <button class="btn btn-filter" id="apply-filters">Применить</button>
+                <button class="btn btn-reset" id="reset-filters">Сбросить</button>
+            </div>
+
+            <!-- Сетка товаров -->
+            <div class="products-grid" id="products-container">
+                <!-- Товары будут загружены через JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Преимущества -->
+    <section class="features">
+        <div class="container">
+            <h2>Почему выбирают нас</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🚚</div>
+                    <h3>Быстрая доставка</h3>
+                    <p>Доставим товары в течение 1-3 дней</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✅</div>
+                    <h3>Гарантия качества</h3>
+                    <p>Только сертифицированные товары</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💳</div>
+                    <h3>Удобная оплата</h3>
+                    <p>Различные способы оплаты</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎁</div>
+                    <h3>Программа лояльности</h3>
+                    <p>Накопительные скидки для постоянных клиентов</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3D Визуализация -->
+    <section class="visualization">
+        <div class="container">
+            <h2>3D Визуализация</h2>
+            <p>Посмотрите, как товары будут смотреться в вашем интерьере</p>
+            <div class="viz-container">
+                <div class="viz-placeholder">
+                    <p>🖼️ Интерактивная 3D-визуализация</p>
+                    <button class="btn btn-primary">Запустить визуализацию</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Отзывы -->
+    <section id="reviews" class="reviews">
+        <div class="container">
+            <h2>Отзывы наших клиентов</h2>
+            <div class="reviews-grid" id="reviews-container">
+                <!-- Отзывы будут загружены через JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Форма консультации -->
+    <section id="consultation" class="consultation">
+        <div class="container">
+            <h2>Бесплатная консультация</h2>
+            <form class="consultation-form" id="consultation-form">
+                <div class="form-group">
+                    <label for="name">Ваше имя *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Телефон *</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email">
+                </div>
+                <div class="form-group">
+                    <label for="message">Сообщение</label>
+                    <textarea id="message" name="message" rows="4"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Отправить заявку</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section id="contacts" class="contacts">
+        <div class="container">
+            <h2>Контакты</h2>
+            <div class="contacts-grid">
+                <div class="contact-info">
+                    <p>📍 Адрес: г. Москва, ул. Примерная, д. 1</p>
+                    <p>📞 Телефон: 8 (800) 123-45-67</p>
+                    <p>✉️ Email: info@homestore.ru</p>
+                    <p>⏰ Режим работы: Пн-Вс 9:00 - 21:00</p>
+                </div>
+                <div class="map-placeholder">
+                    <p>🗺️ Карта проезда</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>HomeStore</h4>
+                    <p>Ваш надежный партнер в создании уютного дома</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Категории</h4>
+                    <ul>
+                        <li><a href="#">Ремонт</a></li>
+                        <li><a href="#">Отделка</a></li>
+                        <li><a href="#">Декор</a></li>
+                        <li><a href="#">Мебель</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="#">О нас</a></li>
+                        <li><a href="#">Доставка</a></li>
+                        <li><a href="#">Оплата</a></li>
+                        <li><a href="#">Гарантии</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Контакты</h4>
+                    <ul>
+                        <li>8 (800) 123-45-67</li>
+                        <li>info@homestore.ru</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 HomeStore. Все права защищены.</p>
+                <p>Соответствует ГОСТ Р 52872-2017 и WCAG 2.1</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

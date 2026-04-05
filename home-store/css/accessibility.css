@@ -1,0 +1,338 @@
+/* Версия для слабовидящих - ГОСТ Р 52872-2017 */
+
+.accessibility-mode {
+    /* Увеличенные размеры */
+    --font-scale: 1.5;
+    --spacing-scale: 1.3;
+    
+    /* Высококонтрастная цветовая схема */
+    --primary-color: #000000;
+    --secondary-color: #000000;
+    --accent-color: #000000;
+    --text-primary: #000000;
+    --text-secondary: #000000;
+    --background-light: #FFFFFF;
+    --background-gray: #FFFFFF;
+    --border-color: #000000;
+}
+
+.accessibility-mode * {
+    font-size: calc(16px * var(--font-scale)) !important;
+    line-height: 1.8 !important;
+    letter-spacing: 0.5px !important;
+}
+
+.accessibility-mode body {
+    background-color: #FFFFFF !important;
+    color: #000000 !important;
+    font-family: Arial, sans-serif !important;
+}
+
+.accessibility-mode .top-bar {
+    background-color: #FFFFFF !important;
+    border-bottom: 3px solid #000000 !important;
+}
+
+.accessibility-mode .btn-accessibility {
+    background-color: #000000 !important;
+    color: #FFFFFF !important;
+    border: 3px solid #000000 !important;
+    padding: 15px 25px !important;
+    font-weight: bold !important;
+}
+
+.accessibility-mode .header {
+    background-color: #FFFFFF !important;
+    box-shadow: none !important;
+    border-bottom: 3px solid #000000 !important;
+}
+
+.accessibility-mode .logo h1 {
+    color: #000000 !important;
+    font-size: 36px !important;
+    font-weight: bold !important;
+}
+
+.accessibility-mode .main-nav a {
+    color: #000000 !important;
+    font-size: 18px !important;
+    font-weight: bold !important;
+    text-decoration: underline !important;
+}
+
+.accessibility-mode .main-nav a:hover {
+    background-color: #000000 !important;
+    color: #FFFFFF !important;
+}
+
+.accessibility-mode .header-actions button {
+    font-size: 28px !important;
+    border: 2px solid #000000 !important;
+    background-color: #FFFFFF !important;
+}
+
+.accessibility-mode .hero {
+    background-color: #FFFFFF !important;
+    color: #000000 !important;
+    padding: 60px 0 !important;
+    border-bottom: 3px solid #000000 !important;
+}
+
+.accessibility-mode .hero-content h2 {
+    color: #000000 !important;
+    font-size: 42px !important;
+    font-weight: bold !important;
+}
+
+.accessibility-mode .hero-content p {
+    color: #000000 !important;
+    font-size: 24px !important;
+}
+
+.accessibility-mode .btn {
+    background-color: #000000 !important;
+    color: #FFFFFF !important;
+    border: 3px solid #000000 !important;
+    padding: 18px 30px !important;
+    font-size: 20px !important;
+    font-weight: bold !important;
+}
+
+.accessibility-mode .btn-secondary {
+    background-color: #FFFFFF !important;
+    color: #000000 !important;
+    border: 3px solid #000000 !important;
+}
+
+.accessibility-mode .catalog {
+    background-color: #FFFFFF !important;
+}
+
+.accessibility-mode .catalog h2 {
+    color: #000000 !important;
+    font-size: 36px !important;
+}
+
+.accessibility-mode .filters {
+    background-color: #FFFFFF !important;
+    border: 3px solid #000000 !important;
+    padding: 30px !important;
+}
+
+.accessibility-mode .filter-group label {
+    color: #000000 !important;
+    font-weight: bold !important;
+    font-size: 18px !important;
+}
+
+.accessibility-mode .filter-group select,
+.accessibility-mode .filter-group input {
+    border: 2px solid #000000 !important;
+    padding: 15px !important;
+    font-size: 18px !important;
+    background-color: #FFFFFF !important;
+    color: #000000 !important;
+}
+
+.accessibility-mode .btn-filter,
+.accessibility-mode .btn-reset {
+    background-color: #000000 !important;
+    color: #FFFFFF !important;
+    border: 3px solid #000000 !important;
+    padding: 15px 25px !important;
+    font-weight: bold !important;
+}
+
+.accessibility-mode .product-card {
+    background-color: #FFFFFF !important;
+    border: 3px solid #000000 !important;
+    box-shadow: none !important;
+}
+
+.accessibility-mode .product-title {
+    color: #000000 !important;
+    font-size: 22px !important;
+    font-weight: bold !important;
+}
+
+.accessibility-mode .product-price {
+    color: #000000 !important;
+    font-size: 28px !important;
+    font-weight: bold !important;
+}
+
+.accessibility-mode .btn-add-to-cart {
+    background-color: #000000 !important;
+    color: #FFFFFF !important;
+    border: 3px solid #000000 !important;
+    font-weight: bold !important;
+}
+
+.accessibility-mode .features {
+    background-color: #FFFFFF !important;
+}
+
+.accessibility-mode .features h2 {
+    color: #000000 !important;
+}
+
+.accessibility-mode .feature-card {
+    background-color: #FFFFFF !important;
+    border: 3px solid #000000 !important;
+}
+
+.accessibility-mode .feature-card h3 {
+    color: #000000 !important;
+    font-size: 24px !important;
+}
+
+.accessibility-mode .visualization {
+    background-color: #FFFFFF !important;
+    color: #000000 !important;
+    border-top: 3px solid #000000 !important;
+    border-bottom: 3px solid #000000 !important;
+}
+
+.accessibility-mode .visualization h2 {
+    color: #000000 !important;
+}
+
+.accessibility-mode .viz-placeholder {
+    background-color: #FFFFFF !important;
+    border: 3px solid #000000 !important;
+}
+
+.accessibility-mode .reviews {
+    background-color: #FFFFFF !important;
+}
+
+.accessibility-mode .reviews h2 {
+    color: #000000 !important;
+}
+
+.accessibility-mode .review-card {
+    background-color: #FFFFFF !important;
+    border: 3px solid #000000 !important;
+}
+
+.accessibility-mode .review-author {
+    color: #000000 !important;
+    font-weight: bold !important;
+}
+
+.accessibility-mode .consultation {
+    background-color: #FFFFFF !important;
+}
+
+.accessibility-mode .consultation h2 {
+    color: #000000 !important;
+}
+
+.accessibility-mode .consultation-form {
+    background-color: #FFFFFF !important;
+    border: 3px solid #000000 !important;
+}
+
+.accessibility-mode .form-group label {
+    color: #000000 !important;
+    font-weight: bold !important;
+}
+
+.accessibility-mode .form-group input,
+.accessibility-mode .form-group textarea {
+    border: 2px solid #000000 !important;
+    background-color: #FFFFFF !important;
+    color: #000000 !important;
+    padding: 15px !important;
+}
+
+.accessibility-mode .contacts {
+    background-color: #FFFFFF !important;
+}
+
+.accessibility-mode .contacts h2 {
+    color: #000000 !important;
+}
+
+.accessibility-mode .contact-info p {
+    color: #000000 !important;
+    font-size: 18px !important;
+}
+
+.accessibility-mode .map-placeholder {
+    background-color: #FFFFFF !important;
+    border: 3px solid #000000 !important;
+    color: #000000 !important;
+}
+
+.accessibility-mode .footer {
+    background-color: #000000 !important;
+    color: #FFFFFF !important;
+    border-top: 3px solid #000000 !important;
+}
+
+.accessibility-mode .footer-section h4 {
+    color: #FFFFFF !important;
+}
+
+.accessibility-mode .footer-section a {
+    color: #FFFFFF !important;
+    text-decoration: underline !important;
+}
+
+.accessibility-mode .footer-bottom {
+    color: #FFFFFF !important;
+    border-top: 2px solid #FFFFFF !important;
+}
+
+/* Убираем все градиенты и тени в режиме доступности */
+.accessibility-mode .btn-primary,
+.accessibility-mode .btn-add-to-cart,
+.accessibility-mode .hero,
+.accessibility-mode .visualization,
+.accessibility-mode .review-avatar {
+    background: #000000 !important;
+    box-shadow: none !important;
+}
+
+/* Увеличиваем все отступы */
+.accessibility-mode section {
+    padding: 80px 0 !important;
+}
+
+.accessibility-mode .container {
+    padding: 0 30px !important;
+}
+
+/* Фокус на элементах */
+.accessibility-mode *:focus {
+    outline: 4px solid #000000 !important;
+    outline-offset: 4px !important;
+}
+
+/* Скрываем декоративные элементы */
+.accessibility-mode .cart-count,
+.accessibility-mode .stars,
+.accessibility-mode .main-nav a::after {
+    display: none !important;
+}
+
+/* Адаптивность для режима доступности */
+@media (max-width: 768px) {
+    .accessibility-mode .header-content {
+        flex-direction: column !important;
+    }
+    
+    .accessibility-mode .main-nav ul {
+        flex-direction: column !important;
+        gap: 20px !important;
+    }
+    
+    .accessibility-mode .filters {
+        flex-direction: column !important;
+    }
+    
+    .accessibility-mode .filter-group {
+        width: 100% !important;
+    }
+}
